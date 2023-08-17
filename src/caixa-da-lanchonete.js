@@ -1,4 +1,5 @@
 class CaixaDaLanchonete {
+
     constructor() {
         this.cardapio = {
             cafe: 3.00,
@@ -66,10 +67,18 @@ class CaixaDaLanchonete {
             return "Forma de pagamento inválida!";
         }
 
-        total *= this.formasDePagamento[formaDePagamento];
+        if (formaDePagamento === 'dinheiro') {
+            total *= this.formasDePagamento[formaDePagamento];
+            total = Math.round(total * 100) / 100;
+        } else if (formaDePagamento === 'credito') {
+            total *= this.formasDePagamento[formaDePagamento];
+            total = Math.round(total * 100) / 100;
+        }
 
-        return `R$ ${total.toFixed(2).replace('.', ',')}`;
+        const formattedTotal = total.toFixed(2);
+        return `R$ ${formattedTotal.toString().replace('.', ',')}`;
     }
+
 }
 
 export { CaixaDaLanchonete };
